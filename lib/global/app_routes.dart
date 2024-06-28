@@ -4,6 +4,7 @@ import 'package:hieuductran/screens/home/home_show_info/home_show_info.dart';
 import 'package:hieuductran/screens/home_screen/home_screen.dart';
 import 'package:hieuductran/screens/login/login_screen.dart';
 
+/// dan chshhss
 class AppRoutes {
   static MaterialPageRoute<dynamic> onGenarateRoute(RouteSettings settings) {
     return MaterialPageRoute<dynamic>(
