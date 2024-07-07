@@ -1,17 +1,13 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:hieuductran/model/user.dart';
 import 'package:hieuductran/screens/home/home_show_info/widgets/home_show_info_text.dart';
-import 'package:hieuductran/screens/home/widgets/home_data.dart';
-// import 'package:hieuductran/screens/profile/profile.dart';
-
 class HomeShowInfoStyle extends StatelessWidget {
-  const HomeShowInfoStyle({super.key, required this.gmail});
-  final String? gmail;
+  const HomeShowInfoStyle({super.key, required this.user});
+  final User user ;
 
   @override
   Widget build(BuildContext context) {
-    Map<String, dynamic> dataName =
-        HomeData().users.firstWhere((value) => value['email'] == gmail);
+    
 
     return Container(
       color: const Color.fromARGB(255, 135, 207, 248),
@@ -36,16 +32,16 @@ class HomeShowInfoStyle extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 HomeShowInfoText(
-                  title: dataName['name'],
+                  title: user.name,
                   fsize: 22,
                   fweight: FontWeight.bold,
                   color: Colors.red,
                 ),
                 HomeShowInfoText(
-                    title: '${'show_age'.tr()} ${dataName['age']}'),
-                HomeShowInfoText(title: 'Gmail : ${dataName['email']}'),
-                HomeShowInfoText(
-                    title: '${'show_address'.tr()} ${dataName['address']}'),
+                    title: 'id : ${user.id}}'),
+                HomeShowInfoText(title: 'Address : ${user.address}'),
+                // HomeShowInfoText(
+                //     title: '${'show_address'.tr()} ${dataName['address']}'),
               ],
             ),
           ),
@@ -60,7 +56,7 @@ class HomeShowInfoStyle extends StatelessWidget {
                 shape: BoxShape.circle,
               ),
               child: CircleAvatar(
-                backgroundImage: AssetImage(dataName['logo']),
+                backgroundImage: AssetImage(user.img),
                 radius: 50,
               ),
             ),

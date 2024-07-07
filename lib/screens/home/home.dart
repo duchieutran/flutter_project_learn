@@ -1,6 +1,9 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:hieuductran/screens/home/widgets/home_data.dart';
+import 'package:hieuductran/global/app_routes.dart';
+import 'package:hieuductran/model/user.dart';
 import 'package:hieuductran/screens/home/widgets/home_delete.dart';
 
 class HomeTab extends StatelessWidget {
@@ -20,8 +23,13 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
-  List<Map<String, dynamic>> users = HomeData().users;
+  List<User> users = [];
   // Create an instance of HomeDelete
+  @override
+  void initState() {
+    fetchAPI();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +38,7 @@ class _HomeWidgetState extends State<HomeWidget> {
       child: ListView.builder(
         itemCount: users.length,
         itemBuilder: (context, index) {
-          Map<String, dynamic> user = users[index];
+          User user = users[index];
           return Slidable(
               endActionPane: ActionPane(
                 motion: const DrawerMotion(),
@@ -118,17 +126,26 @@ class _HomeWidgetState extends State<HomeWidget> {
     );
   }
 
-  Widget buildUserListTile(Map<String, dynamic> user) => ListTile(
+  Widget buildUserListTile(User user) => ListTile(
         onTap: () {
-          Navigator.pushNamed(context, '/homeshowinfo',
-              arguments: user['email']);
+          Navigator.of(context)
+              .pushNamed(AppRoutes.homeShowInfo, arguments: user);
         },
         contentPadding: const EdgeInsets.all(5),
-        title: Text(user['name']),
-        subtitle: Text(user['email']),
+        title: Text(user.name),
+        subtitle: Text(user.email),
         leading: CircleAvatar(
           radius: 30,
-          backgroundImage: AssetImage(user['logo']),
+          backgroundImage: NetworkImage(user.img),
         ),
       );
+
+  Future fetchAPI() async {
+    final response = await rootBundle.loadString('assets/json/user.json');
+    final List data = await json.decode(response);
+
+    setState(() {
+      users = data.map((element) => User.fromJson(element)).toList();
+    });
+  }
 }

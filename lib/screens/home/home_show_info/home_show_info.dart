@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:hieuductran/model/user.dart';
 import 'package:hieuductran/screens/home/home_show_info/widgets/home_show_info_style.dart';
 import 'package:hieuductran/widgets/duchieu_app_bar.dart';
 
@@ -19,7 +20,7 @@ class HomeShowInfo extends StatelessWidget {
             icon: const Icon(Icons.arrow_back_ios_new)),
       ),
       body: HomeShowInfoStyle(
-        gmail: ModalRoute.of(context)!.settings.arguments as String,
+        user: ModalRoute.of(context)!.settings.arguments as User,
       ),
     );
   }

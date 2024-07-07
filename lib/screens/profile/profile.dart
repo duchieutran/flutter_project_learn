@@ -33,19 +33,18 @@ class _ProfileTabWidgetState extends State<ProfileTabWidget> {
                 borderRadius: const BorderRadius.all(Radius.circular(10)),
               ),
               child: ListTile(
-                  leading: ClipOval(
-                    child: Image.asset(
-                      user['logo'],
-                      width: 50,
-                      height: 50,
-                      fit: BoxFit.cover,
-                    ),
+                leading: ClipOval(
+                  child: Image.asset(
+                    user['logo'],
+                    width: 50,
+                    height: 50,
+                    fit: BoxFit.cover,
                   ),
-                  title: Text(user['name']),
-                  subtitle: Text(user['email']),
-                  trailing: const Icon(Icons.more_vert),
-                  )
-                  );
+                ),
+                title: Text(user['name']),
+                subtitle: Text(user['email']),
+                trailing: const Icon(Icons.more_vert),
+              ));
         },
       ),
     );
